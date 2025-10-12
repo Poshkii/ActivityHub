@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model FavoritePlace {
+  id          Int      @id @default(autoincrement())
+  firebaseUid String
+  placeName   String
+  placeType   String
+  latitude    Float
+  longitude   Float
+  address     String?
+  rating      Int?
+  savedAt     DateTime @default(now())
+  
+  @@index([firebaseUid])
+}
+
+model UserActivity {
+  id          Int      @id @default(autoincrement())
+  firebaseUid String
+  activityType String
+  weatherCondition String?
+  timestamp   DateTime @default(now())
+  
+  @@index([firebaseUid])
+}
