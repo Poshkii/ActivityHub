@@ -1,0 +1,46 @@
+# Root level gitignore for monorepo setup
+
+# Environment variables (CRITICAL - Contains API keys!)
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env*.local
+firebase-admin-key.json
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Documentation builds
+docs/_build/
+site/
