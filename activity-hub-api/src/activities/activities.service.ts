@@ -10,17 +10,15 @@ export class ActivitiesService {
         private weatherService: WeatherService, 
         private restaurantService: RestaurantService, 
         private activityService: ActivityService,
-        private photoService: PhotoService, 
     ) {}
 
     async getAllActivities(city: string = 'Vilnius') {
         try {
-        const [weather, restaurants, cafes, activities, photos] = await Promise.all([
+        const [weather, restaurants, cafes, activities] = await Promise.all([
             this.weatherService.getCurrentWeather(city),
             this.restaurantService.getRestaurants(city, 10),
             this.restaurantService.getCafes(city, 5),
             this.activityService.getActivities(city),
-            this.photoService.getCityPhotos(city, 3),
         ]);
 
         return {
@@ -29,7 +27,6 @@ export class ActivitiesService {
             restaurants,
             cafes,
             activities,
-            photos,
             timestamp: new Date().toISOString(),
         };
         } catch (error) {
