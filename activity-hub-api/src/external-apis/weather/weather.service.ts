@@ -15,9 +15,9 @@ export class WeatherService {
         try {
         const { data } = await axios.get(`${this.baseUrl}/weather`, {
             params: {
-            q: city,
-            appid: this.apiKey,
-            units: 'metric', // Celsius
+                q: city,
+                appid: this.apiKey,
+                units: 'metric', // Celsius
             },
         });
 
@@ -32,13 +32,14 @@ export class WeatherService {
             city: data.name,
         };
         } catch (error) {
-        throw new HttpException(
+            throw new HttpException(
             `Weather API error: ${error.message}`,
             error.response?.status || 500,
         );
         }
     }
 
+    /*
     async getForecast(city: string, days: number = 5) {
         try {
         const { data } = await axios.get(`${this.baseUrl}/forecast`, {
@@ -46,7 +47,7 @@ export class WeatherService {
             q: city,
             appid: this.apiKey,
             units: 'metric',
-            cnt: days * 8, // 8 readings per day (every 3 hours)
+            cnt: days * 8, 
             },
         });
 
@@ -57,7 +58,8 @@ export class WeatherService {
             description: item.weather[0].description,
         }));
         } catch (error) {
-        throw new HttpException('Forecast API error', 500);
+            throw new HttpException('Forecast API error', 500);
         }
     }
+    */
 }

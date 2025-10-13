@@ -23,7 +23,6 @@ export class ActivityService {
       this.getTouristAttractions(bounds),
     ]);
 
-    // Ensure we always have arrays (helper methods return [] on error)
     const safeParks = parks ?? [];
     const safeMuseums = museums ?? [];
     const safeAttractions = attractions ?? [];
@@ -82,8 +81,8 @@ export class ActivityService {
         category: 'Culture',
       }));
     } catch (error) {
-      console.error('Overpass API error (museums):', error);
-      return [];
+        console.error('Overpass API error (museums):', error);
+        return [];
     }
   }
 

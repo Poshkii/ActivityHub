@@ -6,7 +6,7 @@ import { CreateFavoriteDto } from './dto/create-favorite.dto';
 
 @ApiTags('favorites')
 @ApiBearerAuth()
-@UseGuards(AuthGuard) // ← Protects all routes with Firebase auth
+@UseGuards(AuthGuard) 
 @Controller('favorites')
 export class FavoritesController {
     constructor(private favoritesService: FavoritesService) {}

@@ -31,7 +31,6 @@ export class FavoritesService {
     // Defines the 'remove' method called by the controller
     async remove(firebaseUid: string, id: string) {
         console.log(`Removing favorite ${id} for user ${firebaseUid}`);
-
         const favorite = await this.prisma.favoritePlace.findFirst({
             where: { id: Number(id), firebaseUid }
         });

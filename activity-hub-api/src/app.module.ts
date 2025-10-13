@@ -13,7 +13,7 @@ import { PrismaModule } from './prisma/prisma.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, // ← Makes ConfigService available everywhere
+      isGlobal: true, 
       envFilePath: '.env',
     }),
     ThrottlerModule.forRoot([{

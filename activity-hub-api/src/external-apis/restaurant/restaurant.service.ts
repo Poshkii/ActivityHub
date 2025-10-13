@@ -8,7 +8,7 @@ export class RestaurantService {
     private readonly apiKey: string;
     private readonly baseUrl = 'https://places-api.foursquare.com/places/search';
     private readonly apiVersion = '2025-06-17';
-    // City coordinates (add more as needed)
+    
     private readonly cityCoordinates = {
         vilnius: { lat: 54.6872, lon: 25.2797 },
         kaunas: { lat: 54.8985, lon: 23.9036 },

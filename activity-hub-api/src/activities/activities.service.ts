@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { WeatherService } from '../external-apis/weather/weather.service';
 import { RestaurantService } from '../external-apis/restaurant/restaurant.service';
 import { ActivityService } from '../external-apis/activity/activity.service';
-import { PhotoService } from '../external-apis/photo/photo.service';
 
 @Injectable()
 export class ActivitiesService {
