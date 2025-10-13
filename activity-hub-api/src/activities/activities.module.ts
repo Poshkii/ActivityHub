@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
-import { ActivitiesService } from './activities.service';
 import { ActivitiesController } from './activities.controller';
+import { ActivitiesService } from './activities.service';
+import { ExternalApisModule } from '../external-apis/external-apis.module';
+import { FirebaseModule } from '../firebase/firebase.module';
 
 @Module({
-  providers: [ActivitiesService],
-  controllers: [ActivitiesController]
+    imports: [ExternalApisModule, FirebaseModule], 
+    controllers: [ActivitiesController],
+    providers: [ActivitiesService],
 })
 export class ActivitiesModule {}

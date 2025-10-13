@@ -6,11 +6,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
+import { useRouter } from 'next/navigation';
 
 export function LoginForm() {
   const [token, setToken] = useState("");
-  
-
+  const router = useRouter();
   const { signIn, signInWithGoogle, user, logout } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,6 +22,7 @@ export function LoginForm() {
     try {
       await signIn(email, password);
       // Redirect handled by auth state change
+      router.push('/');
     } catch (error) {
       alert('Login failed: ' + error);
     } finally {
@@ -33,6 +34,7 @@ export function LoginForm() {
     setLoading(true);
     try {
       await signInWithGoogle();
+      router.push('/');
     } catch (error) {
       alert('Google login failed: ' + error);
     } finally {
@@ -52,8 +54,6 @@ export function LoginForm() {
 
   return (
     <Card className="w-full max-w-md">
-      {/* Debug: Show user info after login */}
-      <div>Token: <b>{token || "Loading..."}</b></div>
       <div style={{ marginBottom: 16, color: 'green', fontSize: 14 }}>
         {user ? (
           <>
@@ -62,7 +62,7 @@ export function LoginForm() {
             <Button onClick={logout}>LogOut</Button>
           </>
         ) : (
-          <div>Not logged in</div>
+          <></>
         )}
       </div>
       <CardHeader>
