@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException  } from '@nestjs/common';
 import { WeatherService } from '../external-apis/weather/weather.service';
 import { RestaurantService } from '../external-apis/restaurant/restaurant.service';
 import { ActivityService } from '../external-apis/activity/activity.service';
@@ -30,7 +30,7 @@ export class ActivitiesService {
         };
         } catch (error) {
             console.error('Error fetching activities:', error);
-            throw error;
+            throw new HttpException('Failed to fetch activities', 500);
         }
     }
 

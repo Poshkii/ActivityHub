@@ -20,13 +20,3 @@ model FavoritePlace {
   
   @@index([firebaseUid])
 }
-
-model UserActivity {
-  id          Int      @id @default(autoincrement())
-  firebaseUid String
-  activityType String
-  weatherCondition String?
-  timestamp   DateTime @default(now())
-  
-  @@index([firebaseUid])
-}

@@ -40,6 +40,7 @@ export class RestaurantService {
             return this.mapPlaces(data.results ?? [], 'restaurant');
         } catch (error) {
             console.error('Foursquare API error:', error.response?.data || error.message);
+            return [];
         }
     }
 
@@ -64,6 +65,7 @@ export class RestaurantService {
             return this.mapPlaces(data.results ?? [], 'cafe');
         } catch (error) {
             console.error('Foursquare API error:', error);
+            return [];
         }
     }
 
@@ -77,7 +79,7 @@ export class RestaurantService {
             address: place.location?.formatted_address,
             category: place.categories?.[0]?.name || type,
             distance: place.distance,
-            rating: place.rating || null,
+            rating: place.rating && place.rating > 0 ? place.rating / 2 : null
         }));
     }
 }
