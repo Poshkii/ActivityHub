@@ -5,12 +5,13 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // CORS setup'as HTTPS protokolui
   app.enableCors({
     origin: ['http://localhost:3000', 'http://localhost:3001'],
     credentials: true,
   });
 
-  // Swagger setup
+  // Swagger setup'as API dokumentacijai
   const { SwaggerModule, DocumentBuilder } = await import('@nestjs/swagger');
   const config = new DocumentBuilder()
     .setTitle('ActivityHub API')
@@ -21,11 +22,11 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  // data validation
+  // duomenu validavimas pagal DTO nustatytus parametrus
   app.useGlobalPipes(new ValidationPipe({
-    whitelist: true, // removes properties that arent in dto       
-    transform: true, // auto transform to dto      
-    forbidNonWhitelisted: true, // throw error if non dto property detected
+    whitelist: true, // istrina parametrus, kurie nera dto      
+    transform: true, // automatiskai konvertuoja i dto     
+    forbidNonWhitelisted: true, // meta klaida jei yra papildomu parametru
   }));
 
   await app.listen(process.env.PORT || 8000);

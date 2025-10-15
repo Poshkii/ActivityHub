@@ -14,10 +14,14 @@ import { ThrottlerGuard } from '@nestjs/throttler';
 
 @Module({
   imports: [
+
+    // Naudojami aplikacijos .ENV kintamieji
     ConfigModule.forRoot({
       isGlobal: true, 
       envFilePath: '.env',
     }),
+
+    // Uzklausu ribojimo konfiguracija, apsauga nuo DDoS
     ThrottlerModule.forRoot([{
       ttl: 60000, // 60 seconds
       limit: 100, // 100 requests per ttl value
@@ -30,6 +34,7 @@ import { ThrottlerGuard } from '@nestjs/throttler';
   ],
   controllers: [AppController],
   providers: [
+    // Uzklausu ribojimo konfiguracijos pritaikymas
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,

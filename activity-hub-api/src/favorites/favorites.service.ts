@@ -4,6 +4,7 @@ import { CreateFavoriteDto } from './dto/create-favorite.dto';
 
 @Injectable()
 export class FavoritesService {
+    // automatiskai pritaiko parametrizuotas uzklausas, nereikia paciam rasyti 'RAW' SQL
     constructor (private prisma: PrismaService) {}
 
     // Defines the 'create' method called by the controller
