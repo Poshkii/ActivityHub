@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+//import { AppController } from './app.controller';
+//import { AppService } from './app.service';
 import { FirebaseModule } from './firebase/firebase.module';
 import { FavoritesModule } from './favorites/favorites.module';
 import { ActivitiesModule } from './activities/activities.module';
@@ -32,14 +32,14 @@ import { ThrottlerGuard } from '@nestjs/throttler';
     ExternalApisModule, 
     PrismaModule
   ],
-  controllers: [AppController],
+  //controllers: [AppController],
   providers: [
     // Uzklausu ribojimo konfiguracijos pritaikymas
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
     },
-    AppService
+    //AppService
   ],
 })
 export class AppModule {}

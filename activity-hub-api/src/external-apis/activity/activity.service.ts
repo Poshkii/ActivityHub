@@ -3,7 +3,8 @@ import axios from 'axios';
 
 @Injectable()
 export class ActivityService {
-  private readonly overpassUrl = 'https://overpass-api.de/api/interpreter';
+  //private readonly overpassUrl = 'https://overpass-api.de/api/interpreter';
+  private readonly overpassUrl = 'https://overpass.kumi.systems/api/interpreter';
 
   // City bounding boxes [south, west, north, east]
   private readonly cityBounds = {
@@ -17,18 +18,15 @@ export class ActivityService {
     const bounds = this.cityBounds[cityKey] || this.cityBounds.vilnius;
 
     // Get parks, museums, and tourist attractions
-    const [parks, museums, attractions] = await Promise.all([
-      this.getParks(bounds),
-      this.getMuseums(bounds),
-      this.getTouristAttractions(bounds),
-    ]);
-
-    const safeParks = parks ?? [];
-    const safeMuseums = museums ?? [];
-    const safeAttractions = attractions ?? [];
-
-    return [...safeParks, ...safeMuseums, ...safeAttractions];
+    console.log(`Fetching parks for city: ${cityKey}`);
+    const parks = await this.getParks(bounds);
+    console.log(`Fetching museums for city: ${cityKey}`);
+    const museums = await this.getMuseums(bounds);
+    console.log(`Fetching attractions for city: ${cityKey}`);
+    const attractions = await this.getTouristAttractions(bounds);
+    return [...(parks ?? []), ...(museums ?? []), ...(attractions ?? [])];
   }
+  
 
   private async getParks(bounds: number[]) {
     const query = `
@@ -42,6 +40,11 @@ export class ActivityService {
 
     try {
       const { data } = await axios.post(this.overpassUrl, `data=${encodeURIComponent(query)}`);
+
+      if (!data || !data.elements || !Array.isArray(data.elements)) {
+        console.warn('No elements returned from Overpass API (parks)');
+        return [];
+      }
       
       return data.elements.map((element: any) => ({
         id: element.id,
@@ -70,6 +73,11 @@ export class ActivityService {
 
     try {
       const { data } = await axios.post(this.overpassUrl, `data=${encodeURIComponent(query)}`);
+
+      if (!data || !data.elements || !Array.isArray(data.elements)) {
+        console.warn('No elements returned from Overpass API (museums)');
+        return [];
+      }
       
       return data.elements.map((element: any) => ({
         id: element.id,
@@ -98,6 +106,11 @@ export class ActivityService {
 
     try {
       const { data } = await axios.post(this.overpassUrl, `data=${encodeURIComponent(query)}`);
+
+      if (!data || !data.elements || !Array.isArray(data.elements)) {
+        console.warn('No elements returned from Overpass API (attractions)');
+        return [];
+      }
       
       return (data.elements || []).slice(0, 5).map((element: any) => ({
         id: element.id,

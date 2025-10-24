@@ -2,15 +2,6 @@
 
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Home, Heart, LogOut, User, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
@@ -27,11 +18,6 @@ export function Header() {
     } catch (error) {
       console.error('Logout failed:', error);
     }
-  };
-
-  // Get initials from email for avatar
-  const getInitials = (email: string) => {
-    return email.charAt(0).toUpperCase();
   };
 
   // Don't show header on login/register pages
